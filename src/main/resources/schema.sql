@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(30) NOT NULL UNIQUE,
+  password_hash VARCHAR(100) NOT NULL,
+  display_name VARCHAR(50) NOT NULL,
+  created_at DATETIME(6) NOT NULL,
+  updated_at DATETIME(6) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  author_id BIGINT NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  content TEXT NOT NULL,
+  view_count INT NOT NULL DEFAULT 0,
+  created_at DATETIME(6) NOT NULL,
+  updated_at DATETIME(6) NOT NULL,
+  CONSTRAINT fk_posts_user FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
